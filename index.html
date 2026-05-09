@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Jack's Agent API — AI Agent Tool Access | Jack's Toolbox</title>
+<meta name="description" content="Structured JSON APIs for AI agents. Format JSON, count tokens, generate QR codes, create palettes, look up domain history. Free: 100/day. Pro: $9/mo unlimited.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f1117;color:#e1e4ed;line-height:1.7}
+.container{max-width:920px;margin:0 auto;padding:40px 24px}
+h1{font-size:2.2rem;background:linear-gradient(135deg,#7c5cff,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+h2{font-size:1.4rem;color:#fff;margin:32px 0 12px;border-bottom:1px solid #2a2d3a;padding-bottom:8px}
+h3{font-size:1.1rem;color:#7c5cff;margin:20px 0 8px}
+p{color:#8892a4;margin:8px 0}
+code{background:#1a1d27;color:#a78bfa;padding:2px 6px;border-radius:4px;font-size:0.9em}
+pre{background:#13151c;border:1px solid #2a2d3a;border-radius:8px;padding:16px;overflow-x:auto;margin:12px 0;font-size:0.85rem;color:#c9d1d9}
+.endpoint{background:#1a1d27;border:1px solid #2a2d3a;border-radius:8px;padding:20px;margin:16px 0}
+.endpoint .method{display:inline-block;background:#7c5cff;color:#fff;font-weight:700;padding:2px 8px;border-radius:4px;font-size:0.8rem;margin-right:8px}
+.endpoint .method.get{background:#238636}
+.endpoint .path{color:#a78bfa;font-family:monospace;font-size:1rem}
+.tag{display:inline-block;background:#252836;color:#8892a4;padding:2px 8px;border-radius:4px;font-size:0.75rem;margin:4px 2px}
+.badge{display:inline-block;background:#7c5cff22;color:#7c5cff;border:1px solid #7c5cff44;padding:2px 10px;border-radius:12px;font-size:0.8rem;font-weight:600}
+.pricing-box{background:linear-gradient(135deg,#1a1d27,#252836);border:1px solid #2a2d3a;border-radius:12px;padding:24px;margin:16px 0;display:inline-block;width:280px;vertical-align:top}
+.pricing-box.pro{border-color:#7c5cff44;background:linear-gradient(135deg,#7c5cff11,#a78bfa11)}
+.pricing-box h3{color:#fff;margin:0 0 4px}
+.pricing-box .price{font-size:2.5rem;font-weight:800;color:#7c5cff;margin:8px 0}
+.pricing-box ul{list-style:none;margin:12px 0;padding:0}
+.pricing-box li{padding:6px 0;color:#8892a4;font-size:0.9rem}
+.pricing-box li::before{content:"✓ ";color:#7c5cff}
+.btn{display:inline-block;background:linear-gradient(135deg,#7c5cff,#a78bfa);color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:700;margin:8px 0;border:none;cursor:pointer;font-size:1rem}
+.btn:hover{opacity:0.9}
+.btn-secondary{background:transparent;border:1px solid #7c5cff;color:#7c5cff;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:600;margin:8px 0;display:inline-block;font-size:0.9rem}
+.footer{margin-top:60px;text-align:center;color:#556;font-size:0.85rem;border-top:1px solid #2a2d3a;padding-top:24px}
+.footer a{color:#7c5cff;text-decoration:none}
+table{width:100%;border-collapse:collapse;margin:12px 0}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid #2a2d3a;font-size:0.9rem}
+th{color:#7c5cff;font-weight:600}
+td{color:#8892a4}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🤖 Jack's Agent API</h1>
+<p style="font-size:1.1rem">Structured JSON endpoints for AI agents. No HTML parsing. No CAPTCHAs. JSON in, JSON out.</p>
+
+<div style="margin:24px 0">
+  <span class="tag">Free: 100 req/day</span>
+  <span class="tag">Pro: $9/mo unlimited</span>
+  <span class="tag">OpenAPI at /docs</span>
+  <span class="tag">JSON in / JSON out</span>
+</div>
+
+<h2>📋 Base URL</h2>
+<p>The base URL for all API endpoints will be announced once deployed. The API server code is ready and tested.</p>
+
+<h2>📋 Endpoints</h2>
+
+<div class="endpoint">
+  <span class="method get">GET</span><span class="path">/health</span>
+  <p><strong>Health check.</strong> Always returns 200 with version info.</p>
+<pre>{
+  "status": "ok",
+  "version": "1.0.0",
+  "timestamp": "2026-05-09T..."
+}</pre>
+</div>
+
+<div class="endpoint">
+  <span class="method">POST</span><span class="path">/api/format/json</span>
+  <p><strong>Format and validate JSON.</strong> Parse, prettify, and validate JSON strings.</p>
+  <p><strong>Body:</strong> <code>{"text": "{\"name\":\"Jack\"}", "indent": 2}</code></p>
+<pre>{
+  "success": true,
+  "formatted": "{\n  \"name\": \"Jack\"\n}",
+  "type": "dict",
+  "length": 24
+}</pre>
+</div>
+
+<div class="endpoint">
+  <span class="method">POST</span><span class="path">/api/validate/json</span>
+  <p><strong>Validate JSON.</strong> Check if a string is valid JSON. Returns detailed errors.</p>
+</div>
+
+<div class="endpoint">
+  <span class="method">POST</span><span class="path">/api/count/tokens</span>
+  <p><strong>Count tokens.</strong> Estimate token count for any AI model.</p>
+  <p><strong>Body:</strong> <code>{"text": "Hello world", "model": "gpt-4"}</code></p>
+<pre>{
+  "characters": 11,
+  "words": 2,
+  "model": "gpt-4",
+  "estimated_tokens": 3
+}</pre>
+<p>Models: GPT-4, GPT-3.5, Claude-3, Claude Sonnet 4, Llama-3, Gemini Pro, DeepSeek</p>
+</div>
+
+<div class="endpoint">
+  <span class="method">POST</span><span class="path">/api/generate/qr</span>
+  <p><strong>Generate QR code.</strong> Create QR codes in PNG, SVG, or base64 format.</p>
+  <p><strong>Body:</strong> <code>{"text": "https://example.com", "format": "base64"}</code></p>
+<pre>{
+  "success": true,
+  "format": "base64",
+  "data_url": "data:image/png;base64,..."
+}</pre>
+</div>
+
+<div class="endpoint">
+  <span class="method">POST</span><span class="path">/api/generate/palette</span>
+  <p><strong>Color palette generator.</strong> Generate complementary, analogous, triadic, or monochromatic palettes.</p>
+  <p><strong>Body:</strong> <code>{"type": "complementary", "base_color": "#7c5cff"}</code></p>
+<pre>{
+  "type": "complementary",
+  "base_color": "#7c5cff",
+  "colors": ["#7c5cff", "...", "..."],
+  "preview_gradient": "linear-gradient(...)"
+}</pre>
+</div>
+
+<div class="endpoint">
+  <span class="method">POST</span><span class="path">/api/domain/history</span>
+  <p><strong>Domain history.</strong> Look up any website's history via Internet Archive Wayback Machine.</p>
+  <p><strong>Body:</strong> <code>{"domain": "example.com", "year": 2024}</code></p>
+<pre>{
+  "domain": "example.com",
+  "latest_snapshot": {
+    "url": "https://web.archive.org/...",
+    "timestamp": "20240509120000"
+  }
+}</pre>
+</div>
+
+<div class="endpoint">
+  <span class="method">POST</span><span class="path">/api/decode/jwt</span>
+  <p><strong>Decode JWT.</strong> Decode JWT tokens without signature verification. Returns header, payload, metadata.</p>
+</div>
+
+<div class="endpoint">
+  <span class="method">POST</span><span class="path">/api/keys/register</span>
+  <p><strong>Get API key.</strong> Register for a free API key (100 requests/day).</p>
+<pre>{
+  "api_key": "jsk_abc123...",
+  "tier": "free",
+  "daily_limit": 100
+}</pre>
+</div>
+
+<h2>💰 Pricing</h2>
+
+<div class="pricing-box">
+  <h3>Free Tier</h3>
+  <div class="price">$0</div>
+  <ul>
+    <li>100 requests/day</li>
+    <li>All endpoints</li>
+    <li>No API key needed</li>
+    <li>Community support</li>
+  </ul>
+  <a href="https://rumblingb.github.io/jacks-toolbox/" class="btn-secondary">Browse tools</a>
+</div>
+
+<div class="pricing-box pro">
+  <h3>Pro Tier</h3>
+  <div class="price">$9</div>
+  <p style="color:#7c5cff;font-weight:600;margin:-4px 0 12px">/month</p>
+  <ul>
+    <li>Unlimited requests</li>
+    <li>All endpoints</li>
+    <li>Priority support</li>
+    <li>Custom integrations</li>
+  </ul>
+  <a href="https://buy.stripe.com/aFaaEZ0qX97Se6cfrt1oI0j" class="btn">Subscribe →</a>
+</div>
+
+<h2>🔧 Usage Examples</h2>
+
+<h3>cURL</h3>
+<pre>curl -X POST https://api.jackstoolbox.dev/api/format/json \
+  -H "Content-Type: application/json" \
+  -d '{"text": "{\"name\":\"Jack\"}", "indent": 2}'</pre>
+
+<h3>Python</h3>
+<pre>import requests
+
+response = requests.post(
+    "https://api.jackstoolbox.dev/api/count/tokens",
+    headers={"X-API-Key": "jsk_your_key_here"},
+    json={"text": "Hello world", "model": "gpt-4"}
+)
+print(response.json())</pre>
+
+<h3>JavaScript (fetch)</h3>
+<pre>const res = await fetch("https://api.jackstoolbox.dev/api/generate/palette", {
+  method: "POST",
+  headers: {"Content-Type": "application/json"},
+  body: JSON.stringify({type: "complementary", base_color: "#7c5cff"})
+});
+const data = await res.json();
+console.log(data.colors);</pre>
+
+<h2>🚀 For AI Agents</h2>
+<p>These APIs are designed for agentic consumption. Add Jack's Agent API as a tool in your agent's configuration:</p>
+<pre># Claude Code config
+# Add to your MCP or tool configuration:
+- name: jack-api
+  url: https://api.jackstoolbox.dev
+  endpoints:
+    - /api/format/json
+    - /api/count/tokens
+    - /api/generate/qr</pre>
+
+<div class="footer">
+  <a href="https://rumblingb.github.io/jacks-toolbox/">🧰 Jack's Toolbox</a> — Free & premium tools for developers & AI agents<br>
+  <span style="color:#3a3d4a">Jack's Agent API v1.0.0 | Stripe Subscriptions: <a href="https://buy.stripe.com/aFaaEZ0qX97Se6cfrt1oI0j" style="color:#7c5cff">$9/mo Pro →</a></span>
+</div>
+
+</div>
+</body>
+</html>
