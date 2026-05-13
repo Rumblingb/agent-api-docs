@@ -1,0 +1,18 @@
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      proKey:
+        type: string
+        description: "Pro key for unlimited access"
+        default: ""
+  commandFunction: |
+    (config) => ({command: 'python3', args: ['server.py', '--pro-key', config.proKey || '']})
+
+displayName: "Agent API Pro"
+description: "Unlimited access to all Agent API endpoints — JSON formatting, token counting, QR codes, color palettes, domain history, JWT decode."
+categories:
+  - "Developer Tools"
+  - "API"
+  - "Utilities"
